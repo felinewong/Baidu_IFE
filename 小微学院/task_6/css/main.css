@@ -1,0 +1,383 @@
+body{
+	background-color:#44565c;
+	color:#767777;
+	font-size:12px;
+	font-family:"Microsoft YaHei";
+	margin:0 auto;
+	width: 100%;
+	height: 100%;
+}
+*{
+	margin:0;
+	padding:0;	
+}
+.container {
+	height: 1386px;
+	width: 892px;
+	margin: 0 auto;
+	padding: 0 45px;
+	background-color: #fff;
+}
+
+/*************************  header start  ***************************/
+header {
+	margin-bottom: 30px;
+	position: relative;
+}
+.header_url {
+	height: 61px;
+	width: 110px;
+	background-color: #d45d5c;
+	position: relative;
+}
+.header_url p{
+	color:#fff;
+	position: absolute;
+	margin-left: 5px;
+	bottom: 5px;
+}
+
+.header_time {
+	position: absolute;
+	right:0;
+	bottom: 5px;
+	color:#d45d5c;
+}
+.header_underline{
+	border:1px solid #938e8c;
+}
+
+/*************************  header end   ****************************/
+
+/*************************  section_one start  ***************************/
+.one {
+	position: relative;
+}
+.one img {
+	height:301px;
+	width: 641px;
+}
+.one_img_l {
+	height: 301px;
+	width: 191px;
+	position: absolute;
+	top:0;
+	left:0;
+	background-color: rgba(141,193,141,.5);
+}
+.one_img_r {
+	height: 301px;
+	width: 191px;
+	position: absolute;
+	top:0;
+	right:251px;
+	background-color: rgba(231,163,193,.5);
+}
+.aside {
+	position: absolute;
+	width: 203px;
+	top:0;
+	right:0;
+}
+
+.aside hr {
+	border: 2px solid #cc8091;
+}
+.aside h2 {
+	color:#000000;
+	font-size: 20px;
+	text-decoration:underline;
+}
+.aside>p{
+	color:#676767;
+	font-family:"STKaiti";
+	margin:10px;
+}
+.aside .num {
+	font-size:116px;
+	color:#75b86b;
+	font-family:"Microsoft YaHei";
+	font-style: italic;
+	position: absolute;
+	top: 100px;
+	right:10px;
+}
+.aside_down {
+	position: absolute;
+	top:240px;
+}
+.aside_down .mark_1{
+	font-size: 55px;
+	color:#cc8091;
+	position: absolute;
+	top: 0;
+	left:0;
+}
+.aside_down .mark_2{
+	font-size: 21px;
+	color:#cc8091;
+	position: absolute;
+	top: 25px;
+	left:85px;	
+}
+.aside_down .mark_3{
+	font-size: 12px;
+	color:#cc8091;
+	position: absolute;
+	top: 45px;
+	left:85px;	
+}
+.two  {
+	width:641px;
+	margin: 20px 0;
+}
+.two h2 {
+	font-size:16px;
+	text-decoration: underline;
+	margin-bottom: 10px;
+}
+.two div{
+	float: left;
+	margin-right:30px;
+	margin-bottom:20px;
+}
+.what {
+	width: 220px;
+}
+.what h2{
+	color:#418c59;
+}
+.when {
+	width: 210px;
+}
+.when h2{
+	color:#d2994f;
+}
+.who  {
+	width:115px;
+}
+.who h2 {
+	color:#cc7680;
+}
+.w_3 p{
+	margin:5px 0;
+	
+}
+.w_3 span{
+	color:#cd4a48;
+	font-size: 12px;
+	opacity: .7;
+	font-style:italic
+}
+/*************************  section_one   end  ***************************/
+
+/*************************  section_three  start  ***************************/
+.three_l   {
+	width:415px;
+	float:left;
+	margin-bottom: 30px;
+}
+
+.three_l_up p {
+	line-height:50px;
+	font-size: 42px;
+	color: #11456b;
+	font-family:"SimHei";
+	margin-bottom:16px;
+}
+.three_l_up p>span {
+	font-size: 72px;
+	font-style: italic;
+	font-weight: 700;
+	color: #f5e327;
+	margin-right:16px;
+}
+.three_l_up hr {
+	width: 415px;
+	border:2px solid #11456b;
+}
+
+.three_l_down {
+	margin-top: 20px;
+}
+.three_l_down span {
+	font-size: 70px;
+	color: #f5e327;
+	float: left;
+	padding: 30px 10px 30px 0;
+}
+
+.three_r {
+	width:458px;
+	float:right;
+}
+.three_l_down p {
+	line-height: 16px;
+}
+.three_l_down .par{
+	text-indent: 2em;
+}
+.three_l_down img {
+	height: 290px;
+	width: 200px;
+	float:right;
+	padding: 15px;
+}
+.three_r {
+	width: 458px;
+	float: right;
+}
+.three_r_up {
+	position: relative;
+}
+.three_r_up img {
+	height:275px;
+	width: 458px;
+}
+.three_r_up .mark {
+	height: 61px;
+	width: 458px;
+	background-color: rgba(0,0,0,.5);
+	position: absolute;
+	bottom: 3px;
+}
+.three_r_up p {
+	position: absolute;
+	bottom: 10px;
+	height:44px;
+	margin-left: 60px;
+	border-left: 3px solid #72b16a;
+}
+.three_r_up .dec_one {
+	font-size: 26px;
+	color:#fff;
+	margin-left: 15px;
+
+}
+.three_r_up .dec_two {
+	font-style: italic;
+	color:#72b16a;
+	margin-left: 15px;
+}
+.three_r_down {
+	height:318px;
+	width: 459px;
+	background-color: #eeedd6;
+	margin-top: 30px;
+	position: relative;
+} 
+.three_r_down .triangle {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 10px solid #10456b;
+	display: inline-block;
+}
+.three_r_down>p span{
+	margin-top: 23px;
+}
+.three_r_down>p{
+	font: 16px "宋体";
+	color: #5a5b5b; 
+	margin-left:30px;
+	padding-top:16px;
+	padding-bottom: 20px;
+}
+.three_r_down .mark_two {
+	font:italic 12px "Microsoft YaHei";
+}
+
+.three_r_down_l {
+	height: 160px;
+	width:260px;
+	background-color: #d45d5c;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+.three_r_down_r {
+	height: 160px;
+	width: 180px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.three_r_down_l span {
+	font-size: 110px;
+	color:#fff;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	padding:0 10px;
+}
+
+.three_r_down_l .line {
+	border-left:2px solid #fff;
+	height:86px;
+	position: absolute;
+	left: 80px;
+	bottom: -10px;
+	margin-bottom: 35px;
+}
+
+.three_r_down_l .mark_one{
+	font: italic 21px/24px "黑体";
+	color: #fff;
+	margin-left:10px;
+	margin-bottom: 10px;
+}
+.three_r_down_l .mark_two{
+	  font: 12px/10px "黑体";
+	  color: #fff;
+	  margin-left:10px;
+}
+.three_r_down_r {
+	width: 180px;
+	height:130px;
+	margin-top:80px;
+	position: absolute;
+	right: 0px;
+	top: 100px;
+}
+.three_r_down_r p span{
+	font: 72px "黑体";
+	color: #d45d5c;
+}
+.three_r_down_r p{
+	font:italic 14px/16px "SimHei";
+	color:#5a5b5b;
+	text-indent: 2em;
+}
+.three_r_down_r .mark_left{
+	position: absolute;
+	right: 150px;
+	top: -20px;
+}
+.three_r_down_r .mark_right{
+	position: absolute;
+	right: -20px;
+	top: 75px;
+}
+	
+/*************************  section_three   end  ***************************/
+
+/*************************  footer   start  ***************************/
+footer {
+	clear:both;
+	width: 892px;
+	height: 60px;
+	border-top: 1px solid #938e8c;
+}
+.footer_url{
+	float: right; font: 12px "黑体"; color: #d45d5c; 
+}
+/*************************  footer   end  ***************************/
+
+
+
+
+
+
+

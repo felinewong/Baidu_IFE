@@ -10,4 +10,10 @@
 
 [任务三：三栏式布局](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/%E5%B0%8F%E5%BE%AE%E5%AD%A6%E9%99%A2/task_3/index.html)
 
+[任务四：定位和居中问题](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/%E5%B0%8F%E5%BE%AE%E5%AD%A6%E9%99%A2/task_4/index.html)
+
+[任务五：零基础HTML及CSS编码（二）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/%E5%B0%8F%E5%BE%AE%E5%AD%A6%E9%99%A2/task_5/index.html)
+
+[任务六：通过HTML及CSS模拟报纸排版](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/%E5%B0%8F%E5%BE%AE%E5%AD%A6%E9%99%A2/task_6/index.html)
+
 
