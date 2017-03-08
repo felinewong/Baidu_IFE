@@ -3,6 +3,11 @@
     padding: 0;
     font-size: 12px;
 }
+.clearfix:after{
+    content:"";
+    display: block;
+    clear:both;
+}
 a{
     text-decoration:none;
     color:#ccc;
@@ -351,6 +356,7 @@ section .rightbox_main .box2_left>button{
     background-color: #fff;
     border: none;
     box-shadow: -1px -1px 1px #ddd;
+    box-sizing: border-box;
 }
 section .rightbox_main .box2_left .btn_left {
     -moz-transform:rotate(180deg); 
@@ -359,6 +365,7 @@ section .rightbox_main .box2_left .btn_left {
 }
 section .rightbox_main .box2_left .btn_right {
     margin-left: 4px;
+    
 }
 section .rightbox_main .box2_left>ul {
     width: 690px;
@@ -366,6 +373,7 @@ section .rightbox_main .box2_left>ul {
     border:none;
     background-color: #eeeeed;
     float: left;
+    box-sizing: border-box;
 }
 section .rightbox_main .box2_left>ul li {
     list-style: none;
@@ -376,6 +384,7 @@ section .rightbox_main .box2_left>ul li {
     background-color: #fff;
     box-shadow: -1px -1px 1px #ddd;
     text-align: center;
+    box-sizing: border-box;
 }
 section .rightbox_main .box2_left>ul li>.time {
     color:#323333;
@@ -396,7 +405,7 @@ section .rightbox_main .box2_right {
     border:1px solid #ddd;
     background-color: #fff;
     box-shadow: -1px -1px 1px #ddd;
-    float: left;
+    float: right;
 }
 section .rightbox_main .box2_right>a{
     display: inline-block;
@@ -426,8 +435,9 @@ section .rightbox_main .box3 ul>li {
     border:1px solid #ddd;
     background-color: #fff;
     box-shadow: -1px -1px 1px #ddd;
-    margin-right: 26px;
+    margin-right: 30px;
     position: relative;
+    box-sizing: border-box;
 }
 section .rightbox_main .box3 ul>li:last-child {
     margin-right: 0;
@@ -663,15 +673,16 @@ section .rightbox_main .box5_left .date_time{
 }
 section .rightbox_main .box5_left .date_time>div{
     height:24px;
-    display:inline-block;
+    float: left;
     border: 1px solid #cacbcb;
     text-align: center;
     line-height: 20px;
     cursor: pointer;
-    margin-left: 2px;
+    margin-left: 6px;
+    box-sizing: border-box;
 }
 .w62{
-    width:62px;
+    width:64px;
 }
 .w73{
     width:73px;
