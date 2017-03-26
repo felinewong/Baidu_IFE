@@ -31,6 +31,6 @@
 
 [任务三：零基础JavaScript编码（三）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_3/index.html)
 
-[任务二：零基础JavaScript编码（二）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_1/index.html)
+[任务四：基础JavaScript练习（一）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_4/index.html)
 
 [任务二：零基础JavaScript编码（二）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_1/index.html)
