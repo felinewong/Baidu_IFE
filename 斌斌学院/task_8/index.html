@@ -1,0 +1,134 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>task_4</title>
+    <style>
+         div {
+             font-size: 5px;
+         }
+         .root div{
+            border:1px solid #333;
+            display: flex;
+            justify-content: center;
+			align-items: center;
+            margin: 5px;
+        }
+        .root {
+            border:1px solid #333;
+            display: flex;
+            justify-content: center;
+			align-items: center;
+            height: 100px;
+
+        }
+        .one {
+            height: 80px;
+            min-width: 80px;
+
+        }
+        .two {
+            height: 60px;
+             min-width: 80px;
+        }
+        .three {
+            height: 40px;
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div id="control">
+        <button id="pre">遍历</button>
+        <input type="text" id="num" >
+        <button id="search">搜索</button>
+    </div>
+    <div class="root">1
+        <div class="one">2
+            <div class="two">3
+                <div class="three">4</div>
+                <div class="three">5</div>
+                <div class="three">6</div>
+                <div class="three">7</div>
+            </div>
+            <div class="two">8
+                <div class="three">9</div>
+                <div class="three">10</div>
+            </div>
+            <div class="two">11
+            </div>
+        </div>
+        <div class="one">12
+            <div class="two">13
+                <div class="three">14</div>
+            </div>
+            <div class="two">15
+                <div class="three">16</div>
+                <div class="three">17</div>
+            </div>
+            <div class="two">18
+                <div class="three">19</div>
+                <div class="three">20</div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    var root = document.getElementsByClassName('root')[0];
+    var pre = document.getElementById('pre');
+    var search = document.getElementById('search');
+    var num =  document.getElementById('num');
+    var end = true;
+    var arr = [];
+    function preOrder(node){
+        if(node != null){
+            for(var i=0; i<node.children.length; i++){
+                preOrder(node.children[i]);
+            }
+            arr.push(node);
+        }
+    }
+    pre.onclick = function(){
+       if(!end)return; 
+       preOrder(root);
+       animate();
+    }
+    search.onclick = function(){
+       if(!end)return; 
+       preOrder(root);
+       animate(num.value);
+    }
+
+    function animate(key){
+        end = false;
+        var i = 0;
+        var searchArr = [];
+        setTimeout(function foo(){
+            if(i > arr.length-1){
+                end = true;
+                if(!searchArr.includes(arr[i-1])){
+                     arr[i-1].style.backgroundColor = '#fff';
+                }
+                if(key && (searchArr.length == 0)){
+                    alert('找不到！');
+                }
+                arr = [];
+                return;
+            }
+            if(arr[i].firstChild.nodeValue.trim() == key){
+                searchArr.push(arr[i]);
+                arr[i].style.backgroundColor = 'yellow';
+            } else {
+                arr[i].style.backgroundColor = '#00f'; 
+            }
+            if(i && !searchArr.includes(arr[i-1])) {
+                arr[i-1].style.backgroundColor = '#fff';
+            }
+            i++;
+            setTimeout(foo,500);
+        }, 500);
+    }
+
+</script>
+</body>
+</html>
