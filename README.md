@@ -29,7 +29,7 @@
 
 [任务二：零基础JavaScript编码（二）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_2/index.html)
 
-[任务二：零基础JavaScript编码（二）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_1/index.html)
+[任务三：零基础JavaScript编码（三）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_3/index.html)
 
 [任务二：零基础JavaScript编码（二）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_1/index.html)
 
