@@ -1,0 +1,138 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>task_4</title>
+    <style>
+         .root div{
+            border:1px solid #333;
+            display: flex;
+            justify-content: center;
+			align-items: center;
+            margin: 5px;
+        }
+        .root {
+            border:1px solid #333;
+            display: flex;
+            justify-content: center;
+			align-items: center;
+            height: 100px;
+            width: 800px;
+        }
+        .one {
+            height: 80px;
+            width: 380px;
+        }
+        .two {
+            height: 60px;
+            width: 160px;
+        }
+        .three {
+            height: 40px;
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div id="control">
+        <button id="pre">前序遍历</button>
+        <button id="mid">中序遍历</button>
+        <button id="post">后序遍历</button>
+    </div>
+    <div class="root">
+        <div class="one">
+            <div class="two">
+                <div class="three">
+                </div>
+                <div class="three">
+                </div>
+            </div>
+            <div class="two">
+                <div class="three">
+                </div>
+                <div class="three">
+                </div>
+            </div>
+        </div>
+        <div class="one">
+            <div class="two">
+                <div class="three">
+                </div>
+                <div class="three">
+                </div>
+            </div>
+            <div class="two">
+                <div class="three">
+                </div>
+                <div class="three">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    var root = document.getElementsByClassName('root')[0];
+    var pre = document.getElementById('pre');
+    var mid = document.getElementById('mid');
+    var post = document.getElementById('post');
+    var end = true;
+    var arr = [];
+    function preOrder(node){
+        if(node != null){
+            arr.push(node);
+            preOrder(node.firstElementChild);
+            preOrder(node.lastElementChild);
+        }
+    }
+    function midOrder(node){
+        if(node != null){
+            preOrder(node.firstElementChild);
+            arr.push(node);
+            preOrder(node.lastElementChild);
+        }
+    }
+    function postOrder(node){
+        if(node != null){
+            preOrder(node.firstElementChild);
+            preOrder(node.lastElementChild);
+            arr.push(node);
+        }
+    }
+    pre.onclick = function(){
+       if(!end)return; 
+       preOrder(root);
+       animate();
+    }
+    mid.onclick = function(){
+       if(!end)return; 
+       midOrder(root);
+       animate();
+    }
+    post.onclick = function(){
+       if(!end)return; 
+       postOrder(root);
+       animate();
+    }
+
+    function animate(){
+        end = false;
+        var i = 0;
+        setTimeout(function foo(){
+            if(i > arr.length-1){
+                end = true;
+                arr[i-1].style.backgroundColor = '#fff';
+                arr = [];
+                return;
+            }
+            arr[i].style.backgroundColor = '#00f';
+            if(i) {
+                arr[i-1].style.backgroundColor = '#fff';
+            }
+            i++;
+            setTimeout(foo,500);
+        }, 500);
+    }
+
+</script>
+</body>
+</html>
