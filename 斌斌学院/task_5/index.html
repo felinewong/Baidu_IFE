@@ -1,0 +1,139 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>task_4</title>
+    <style>
+        ul {
+           padding: 0;
+           overflow: hidden;
+        }
+        ul li{
+            list-style: none;
+            display: inline-block;
+            height: 20px;
+            width: 12px;
+            background-color: red;
+            text-align: center;
+            margin: 0 1px;
+            color: #fff;
+            font-size: 2px;
+            vertical-align: bottom;
+        }
+        #control {
+
+        }
+    </style>
+</head>
+<body>
+    <div id="control">
+        <input type="text" id="num">
+        <button id="left_insert">左侧入</button>
+        <button id="right_insert">右侧入</button>
+        <button id="left_remove">左侧出</button>
+        <button id="right_remove">右侧出</button>
+        <button id="random">随机生成</button>
+        <button id="sort">冒泡排序</button>
+    </div>
+    <ul>
+    </ul>
+<script type="text/javascript">
+    var list = document.getElementsByTagName("ul")[0];
+    var left_insert = document.getElementById("left_insert");
+    var right_insert = document.getElementById("right_insert");
+    var left_remove = document.getElementById("left_remove");
+    var right_remove = document.getElementById("right_remove");
+    var random = document.getElementById("random");
+    var sort = document.getElementById("sort");
+
+    function createNode(num){
+        if(list.children.length>60){
+            alert("数量超出");
+            return;
+        }
+        
+        if(num>=10 && num<=100){
+            var node = document.createElement('li');
+            node.innerText =  num;
+            node.style.height =num + "px";
+            return node;
+        } else {
+            alert("输入异常");
+            return;
+        }
+    }
+    left_insert.onclick = function(){
+        var num = parseInt(getNum());
+        var newNode = createNode(num);
+        if(newNode){
+             var oldNode = list.children[0];
+            list.insertBefore(newNode,oldNode); 
+        }
+    }
+
+    right_insert.onclick = function(){
+        var num = parseInt(getNum());
+        var newNode = createNode(num);
+
+        if(newNode){
+            list.appendChild(newNode);
+        }
+    }
+    left_remove.onclick = function(){
+       if(list.children.length > 0){
+            var node = list.children[0];
+            list.removeChild(node);
+       }  
+    }
+    right_remove.onclick = function(){
+       if(list.children.length > 0){
+            var node = list.children[list.children.length-1];
+            list.removeChild(node);
+       }  
+    }
+
+    random.onclick = function(){
+        list.innerHTML = "";
+        for(var i=0; i<60; i++){
+            var num = Math.floor((Math.random()*90+10));
+            var newNode = createNode(num);
+            if(newNode){
+                list.appendChild(newNode);
+            }
+       } 
+    }
+	
+
+    sort.onclick = function(){
+        var liNode =  list.children;
+        var len =  liNode.length;
+        var i=0,j=len-1;
+        timer = setInterval(function(){
+            if(i>=len -1){
+                clearInterval(timer);
+            }
+            if(j == i){
+                j=len-1;
+                i++;
+            }
+            if(liNode[j].innerText < liNode[j-1].innerText){
+                var temp = liNode[j].innerText;
+                liNode[j].innerText = liNode[j-1].innerText;
+                liNode[j-1].innerText = temp;
+                liNode[j].style.height = liNode[j].innerText + "px";
+                liNode[j-1].style.height = liNode[j-1].innerText + "px";
+            }
+            j--;
+
+        },10);
+    }
+
+    function getNum(){
+         var num =  document.getElementById("num");
+         return num.value;
+    }
+
+
+</script>
+</body>
+</html>
