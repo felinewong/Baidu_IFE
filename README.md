@@ -2,7 +2,7 @@
 
 [百度前端技术学院](http://ife.baidu.com/) 2017。
 
-##小微学院
+## 小微学院
 
 [任务一：零基础HTML编码](http://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/%E5%B0%8F%E5%BE%AE%E5%AD%A6%E9%99%A2/task_1/index.html)
 
@@ -23,7 +23,7 @@
 [任务九：使用HTML/CSS实现一个复杂页面](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/%E5%B0%8F%E5%BE%AE%E5%AD%A6%E9%99%A2/task_9/index.html)
 
 
-##斌斌学院
+## 斌斌学院
 
 [任务一：零基础JavaScript编码（一）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_1/index.html)
 
@@ -32,5 +32,9 @@
 [任务三：零基础JavaScript编码（三）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_3/index.html)
 
 [任务四：基础JavaScript练习（一）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_4/index.html)
+
+[任务五：基础JavaScript练习（二）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_5/index.html)
+
+[任务六：基础JavaScript练习（三）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_6/index.html)
 
 [任务二：零基础JavaScript编码（二）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_1/index.html)

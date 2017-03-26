@@ -1,0 +1,103 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>task_4</title>
+    <style>
+        textarea {
+            height: 100px;
+            width: 2d00px;
+        }
+        ul {
+            margin-left: -40px;
+            margin-top: 5px;
+        }
+        ul li{
+            list-style: none;
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            background-color: red;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            color: #fff;
+        }
+        #control {
+
+        }
+    </style>
+</head>
+<body>
+    <div id="control">
+        <textarea  id="textarea"></textarea>
+        <button id="left_insert">左侧入</button>
+        <button id="right_insert">右侧入</button>
+        <button id="left_remove">左侧出</button>
+        <button id="right_remove">右侧出</button>
+    </div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+ 
+
+<script type="text/javascript">
+    var list = document.getElementsByTagName("ul")[0];
+    var left_insert = document.getElementById("left_insert");
+    var right_insert = document.getElementById("right_insert");
+    var left_remove = document.getElementById("left_remove");
+    var right_remove = document.getElementById("right_remove");
+
+    left_insert.onclick = function(){
+        var arr = getNums();
+        if(arr.length > 0){
+           var oldNode = list.children[0];
+           arr.forEach(function(value){
+               var node = document.createElement('li');
+                node.innerText =  value;
+                list.insertBefore(node,oldNode);
+           });
+           
+       } else {
+           alert("请输入！");
+       }  
+    }
+
+    right_insert.onclick = function(){
+        var arr = getNums();
+        if(arr.length > 0){
+           arr.forEach(function(value){
+               var node = document.createElement('li');
+                node.innerText =  value;
+                list.appendChild(node);
+           });
+           
+       } else {
+           alert("请输入！");
+       } 
+    }
+    left_remove.onclick = function(){
+       if(list.children.length > 0){
+            var node = list.children[0];
+            list.removeChild(node);
+       }  
+    }
+    right_remove.onclick = function(){
+       if(list.children.length > 0){
+            var node = list.children[list.children.length-1];
+            list.removeChild(node);
+       }  
+    }
+
+    function getNums(){
+         var str =  document.getElementById("textarea").value;
+         var arr = str.split(/[,，、\s]/);
+         return arr;
+    }
+
+
+</script>
+</body>
+</html>
