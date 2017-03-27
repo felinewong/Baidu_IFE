@@ -39,4 +39,4 @@
 
 [任务七：JavaScript和树（一）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_7/index.html)
 
-[任务八：JavaScript和树（二）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_8/index.html)
+[任务九：JavaScript和树（三）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_9/index.html)
