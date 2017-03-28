@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>task_1</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-6">
+                <form class="form-horizontal">
+                    <div id="group_1" class="form-group">
+                        <label class="col-xs-2" >名称</label>
+						<div class="col-xs-8">
+							<input type="text" class="form-control j-getValue">
+						</div>
+                        <div class="col-xs-2">
+                            <button type="button" class="form-control btn btn-primary j-checkValid">验证</button>
+                        </div>
+                        <div class="col-xs-12">
+							<p class="text-muted j-info">必填,长度应为4~16个字符</p>
+						</div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        var input = document.getElementsByClassName("j-getValue")[0];
+        var btn = document.getElementsByClassName("j-checkValid")[0];
+        var info = document.getElementsByClassName("j-info")[0];
+
+        function getLength(str){
+            var enLen = 0;
+            var chLen = 0;
+            for(var i of str){
+                if(i.codePointAt(0) <= 0xFF){
+                    enLen++;
+                } else {
+                    chLen++;
+                }
+            }
+            return enLen + chLen*2;
+        }
+
+        btn.onclick = function() {
+            var len = getLength(input.value);
+            if(!len){
+                info.innerText = "姓名不能为空";
+                info.className += " text-danger";
+            } else if(len >16 || len<4){
+                info.innerText = "长度应为4~16个字符";
+                info.className += " text-danger";
+            } else {
+                info.innerText = "校验成功";
+                info.className = "text-info j-info";
+            }
+        }
+    </script>
+
+  </body>
+</html>

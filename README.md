@@ -40,3 +40,8 @@
 [任务七：JavaScript和树（一）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_7/index.html)
 
 [任务九：JavaScript和树（三）](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/斌斌学院/task_9/index.html)
+
+
+## 耀耀学院
+
+[任务一：表单（一）单个表单项的检验](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/耀耀学院/task_1/index.html)
