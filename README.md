@@ -45,3 +45,5 @@
 ## 耀耀学院
 
 [任务一：表单（一）单个表单项的检验](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/耀耀学院/task_1/index.html)
+
+[任务二：表单（二）多个表单项的动态校验](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/耀耀学院/task_2/index.html)
