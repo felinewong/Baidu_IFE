@@ -52,3 +52,5 @@
 ## ECharts & WebVR学院
 
 [WebGL No.1 - Three.js 入门](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_1/index.html)
+
+[WebGL No. 2 - 光与影](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_2/index.html)
