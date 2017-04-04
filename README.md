@@ -58,3 +58,5 @@
 [WebGL No. 3 - 材质与纹理](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_3/index.html)
 
 [WebGL No. 4 - 照相机和交互控制](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_4/index.html)
+
+[WebGL No.5 - 动画](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_5/index.html)
