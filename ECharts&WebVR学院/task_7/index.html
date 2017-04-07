@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TEST</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+			body {
+				font-family: Monospace;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+			}
+		</style>
+</head>
+<body >
+
+    <script type="text/javascript" src="../lib/three.min.js"></script>
+    <script type="text/javascript" src="../lib/OrbitControls.js"></script>
+    <script type="text/javascript" src="../lib/Detector.js"></script>
+    <script type="text/javascript" src="../lib/stat.js"></script>
+    <script type="text/javascript" src="../lib/zepto.js"></script>
+    <script type="text/javascript" src="../lib/dat.gui.min.js"></script>
+    <script type="text/javascript" src="../lib/BabylonLoader.js"></script>
+    <script type="text/javascript">
+        var stat = null,
+            scene = null,
+            renderer = null,
+            camera = null,
+            controls = null,
+            noneMat = null,
+            model = null,
+
+            keyLight = null,
+            fillLight = null,
+
+            shaders = [],
+            shaderConfig = null,
+
+            gui = null;
+
+
+
+        
+        init();
+           
+        function init(){
+            //探测器
+            if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+            //监测帧数
+            stat = new Stats();
+            stat.domElement.style.position = 'absolute';
+            stat.domElement.style.left = '0px';
+            stat.domElement.style.top = '0px';
+            document.body.appendChild(stat.domElement);
+
+            //renderer 并添加到dom树中
+            renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0xf3f3f3);
+            document.body.appendChild( renderer.domElement);
+
+            //scene
+            scene = new THREE.Scene();
+
+             //camera
+            camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 100;
+            camera.lookAt(0,0,0);
+            scene.add(camera);
+ 
+            //controls
+            controls = new THREE.OrbitControls( camera, renderer.domElement );
+            controls.addEventListener('change', render);
+            
+            
+
+            // texture
+            var manager = new THREE.LoadingManager();
+            manager.onProgress = function(item, loaded, total){
+                console.log(item, loaded, total);
+            }
+
+          var onProgress = function(xhr){
+                if(xhr.lengthComputable){
+                    var percentComplete = xhr.loaded / xhr.total * 100;
+                    console.log(Math.round(percentComplete,2) + "% downloaded");
+                }
+            }
+
+            var onError = function(xhr){
+
+            }
+      
+     
+
+            // model
+            var loader = new THREE.BabylonLoader(manager);
+            loader.load('model/skull.babylon', function( babylonScene ){
+                babylonScene.traverse(function(obj){
+                    if(obj instanceof THREE.Mesh){
+                        model = obj;
+                        noneMat= new THREE.MeshPhongMaterial({
+                            color: 0x777777
+                        });
+                        obj.material = noneMat;
+                    }
+                });
+                scene.add(model);
+            }, onProgress, onError );  
+
+            keyLight = new THREE.SpotLight(0xffffff, 1, 5000, Math.PI/6, 25);
+            keyLight.position.set(1000,1000,500);
+            keyLight.target.position.set(100,0,0);
+            scene.add(keyLight);  
+
+            backLight = new THREE.AmbientLight(0xffffff, 0.2);
+            scene.add(backLight);
+
+            animate();
+            window.addEventListener('resize', onWindowResize);
+            $.get('shader/shader.config.json', function (data) {
+                    shaderConfig = JSON.parse(data);
+                    initControl();
+                });
+            
+        }
+
+        function onWindowResize(){
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+             renderer.setSize(window.innerWidth, window.innerHeight);
+             render();
+        }
+
+
+        function animate() {        
+            render();      
+            requestAnimationFrame(animate);       
+        }
+
+        function render(){
+            //render
+            stat.begin();
+            renderer.render(scene, camera);
+            stat.end();
+        }
+
+        function useShader(name){
+            
+            if(name === "none"){
+                model.material = noneMat;
+                return ;
+            }
+
+            if(!shaderConfig){
+                setTimeout(function(){
+                    useShader(name);
+                },1000);
+                return;
+            }
+
+            var lightUniform = {
+                type: 'v3',
+                value: keyLight.position
+            };
+            
+            setShader('apple', model, {
+                uniforms: {
+                    color: {
+                        type: 'v3',
+                        value: new  THREE.Color('#f55c1f')
+                    },
+                    light: lightUniform
+                }
+            });
+                     
+            function setShader(meshName, mesh, qualifiers){
+                //alert(shaderConfig);
+                var config = shaderConfig[name][meshName];
+              
+                if(shaders[name]){
+                    mesh.material = shaders[name][meshName];
+                } else {
+                    $.get('shader/' + config.path  + '.vs', function(vs){
+                        $.get('shader/' + config.path  + '.fs', function(fs){
+                            applyShader(vs,fs);
+                        });
+                    })
+                }
+
+                function applyShader(vs, fs){
+                    var material = new THREE.ShaderMaterial({
+                        vertexShader: vs,
+                        fragmentShader: fs,
+                        uniforms: qualifiers.uniforms
+                    });
+                    mesh.material = material;
+
+                    if(!config[name]){
+                        config[name] = {};
+                    }
+                    config[name][meshName] = material;
+                }
+            }
+
+        }
+
+        function initControl() {
+            gui = new dat.GUI();
+
+            var shaderNames = ['none','cartoon','cartoon-silhouette','normal'];
+            for(var shader in shaderConfig){
+                shaderNames.push(shader);
+            }
+
+            var option = {
+                'Shader': 'none',
+                'Light X': keyLight.position.x,
+                'Light Y': keyLight.position.y,
+                'Light Z': keyLight.position.z,
+            };
+
+            // shader
+            gui.add(option, 'Shader', shaderNames).onChange(function(value){
+                useShader(value);
+            });
+
+            //light
+            var lightFolder = gui.addFolder('Light');
+            lightFolder.add(option, 'Light X').min(-2000).max(2000)
+                .onChange(function (value){
+                    keyLight.position.x = value;
+                });
+
+            lightFolder.add(option, 'Light Y').min(-2000).max(2000)
+                .onChange(function (value){
+                    keyLight.position.y = value;
+                });
+
+            lightFolder.add(option, 'Light Z').min(-2000).max(2000)
+                .onChange(function (value){
+                    keyLight.position.z = value;
+                });
+        }
+    </script>
+
+</body>
+</html>

@@ -62,3 +62,5 @@
 [WebGL No.5 - 动画](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_5/index.html)
 
 [WebGL No.6 - 外部模型](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_6/index.html)
+
+[WebGL No.7 - 着色器](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_7/index.html)

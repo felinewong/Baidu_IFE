@@ -1,0 +1,29 @@
+{
+    "normal": {
+        "name": "Normal",
+        "apple": {
+            "path": "normal"
+        },
+        "stem": {
+            "path": "normal"
+        }
+    },
+    "cartoon": {
+        "name": "Cartoon",
+        "apple": {
+            "path": "cartoon"
+        },
+        "stem": {
+            "path": "cartoon"
+        }
+    },
+    "cartoon-silhouette": {
+        "name": "Cartoon with Silhouette",
+        "apple": {
+            "path": "cartoon-silhouette"
+        },
+        "stem": {
+            "path": "cartoon-silhouette"
+        }
+    }
+}
