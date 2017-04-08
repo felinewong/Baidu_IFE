@@ -64,3 +64,5 @@
 [WebGL No.6 - 外部模型](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_6/index.html)
 
 [WebGL No.7 - 着色器](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_7/index.html)
+
+[WebGL No.8 - 物理引擎](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_8/index.html)
