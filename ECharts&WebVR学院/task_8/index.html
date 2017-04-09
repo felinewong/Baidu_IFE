@@ -13,11 +13,34 @@
 		}
         .score_container {
             position: absolute;
-            top: 10px;
-            left: 50%;
-            margin-left: -122px;
+            bottom: 10px;
+            left: 20px;
             color: #ff0000;
             font-size: 50px;
+        }
+        .control_container #up {
+            position: absolute;
+            bottom: 45px;
+            right: 70px;
+        }
+        .control_container #down {
+            position: absolute;
+            bottom: 10px;
+            right: 70px;
+        }
+        .control_container #left {
+            position: absolute;
+            bottom: 10px;
+            right: 125px;
+        }
+        .control_container #right {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+        }
+        .control_container button{
+            width: 50px;
+            height: 30px;
         }
        
 	</style>
@@ -25,6 +48,12 @@
 <body >
     <div class="score_container">
         <div >score:<span id="score">0<span></div>
+    </div>
+    <div class="control_container">
+        <button id="up" onmousedown="keyDown(87)" onmouseup="keyUp(87)">up</button>
+        <button id="down" onmousedown="keyDown(83)" onmouseup="keyUp(83)">down</button>
+        <button id="left" onmousedown="keyDown(65)" onmouseup="keyUp(65)">left</button>
+        <button id="right" onmousedown="keyDown(68)" onmouseup="keyUp(68)">right</button>
     </div>
     <audio src="sound/explode.mp3" preload="auto" id="explode_sound"></audio>
 
@@ -40,6 +69,8 @@
     <script type="text/javascript">
 
         'use strict';
+        
+        
         Physijs.scripts.worker = '../lib/physijs_worker.js';
         Physijs.scripts.ammo = '../lib/ammo.js';
 
@@ -467,11 +498,17 @@
             return mycar;        
         }
 
-        document.onkeydown = function(event){
-              var e = event || window.event || arguments.callee.caller.arguments[0];
+        function keyDown(event){
+              var keyCode;
+              if(typeof event == "number"){
+                  keyCode = event;
+              } else {
+                var e = event || window.event || arguments.callee.caller.arguments[0];
+                keyCode = e.keyCode;
+              }
               var xFoward = 0.2 * Math.cos(rotate);
               var yFoward = 0.2 * Math.sin(rotate);
-              switch(e.keyCode){
+              switch(keyCode){
                 case 38:
                 //↑
                     
@@ -521,11 +558,17 @@
             }
          };
 
-         document.onkeyup = function(event){
-              var e = event || window.event || arguments.callee.caller.arguments[0];
+         function keyUp(event){
+              var keyCode;
+              if(typeof event == "number"){
+                  keyCode = event;
+              } else {
+                var e = event || window.event || arguments.callee.caller.arguments[0];
+                keyCode = e.keyCode;
+              }
               var xFoward = 0.2 * Math.cos(rotate);
               var yFoward = 0.2 * Math.sin(rotate);
-              switch(e.keyCode){
+              switch(keyCode){
                 case 38:
                 //↑
                     
@@ -594,7 +637,8 @@
 
          }
 
-         
+         document.onkeydown = keyDown;
+         document.onkeyup =  keyUp;
     </script>
 
 </body>
