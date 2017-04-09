@@ -5,15 +5,29 @@
     <title>TEST</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
-			body {
-				font-family: Monospace;
-				color: #fff;
-				margin: 0px;
-				overflow: hidden;
-			}
-		</style>
+		body {
+			font-family: Monospace;
+			color: #fff;
+			margin: 0px;
+			overflow: hidden;
+		}
+        .score_container {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            margin-left: -122px;
+        }
+        .score_container #score {
+            color: #ff0000;
+            font-size: 50px;
+        }
+	</style>
 </head>
 <body >
+    <div class="score_container">
+        <div id="score">0</div>
+    </div>
+    <audio src="sound/explode.mp3" preload="auto" id="explode_sound"></audio>
 
     <script type="text/javascript" src="../lib/three.min.js"></script>
     <script type="text/javascript" src="../lib/OrbitControls.js"></script>
@@ -27,10 +41,13 @@
     <script type="text/javascript">
 
         'use strict';
-        Physijs.scripts.worker = '../lib/physijs_worker.js';
-        Physijs.scripts.ammo = '../lib/ammo.js';
+        Physijs.scripts.ammo = 'ammo.js';
+        Physijs.scripts.worker = 'js/physijs_worker.js';
+        
 
-        var stat = null,
+        var explode_sound = document.getElementById('explode_sound'),
+            score = document.getElementById('score'),
+            stat = null,
             scene = null,
             renderer = null,
             camera = null,
@@ -55,7 +72,10 @@
 
             gui = null,
 
-            rotate = 0;
+            rotate = 0,
+            collideMeshList = [],
+            //标志碰撞是否发生
+            crash = false;
 
      
         window.onload = init;
@@ -96,7 +116,7 @@
 
              //camera
             camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(95,94,96);
+            camera.position.set(-85,94,-96);
             scene.add(camera);
  
             //controls
@@ -139,7 +159,7 @@
             var plane_geometry = new THREE.PlaneGeometry(100,100,50,50);
             for(var i=0; i<plane_geometry.vertices.length; i++){
                 var vertex = plane_geometry.vertices[i];
-                vertex.z = NoiseGen.noise(vertex.x / 20, vertex.y / 20) * 2;
+                vertex.z = NoiseGen.noise(vertex.x / 20, vertex.y / 20) * 1;
             }
             plane_geometry.computeFaceNormals();
             plane_geometry.computeVertexNormals();
@@ -193,9 +213,95 @@
         }
 
 
-        function animate() {        
-            render();      
-            requestAnimationFrame(animate);       
+        function animate() {             
+            
+            update();
+            render(); 
+            requestAnimationFrame(animate);
+
+        }
+
+        function update() {
+             //记录当前被撞物体
+             var curCollideMesh = null;
+             var originPoint = car.position.clone();
+
+             //遍历模型所有顶点
+             for(let i=0; i<car.geometry.vertices.length; i++){
+                 //顶点原坐标
+                 let localVertex = car.geometry.vertices[i].clone();
+                 //顶点经过变换后的坐标
+                 let globalVertex = localVertex.applyMatrix4(car.matrix);
+                 let directionVector = globalVertex.sub(car.position);
+
+                 let ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
+             
+                 //射线是否与与物体产生交集
+                 let collisionResults = ray.intersectObjects(collideMeshList);
+                 if(collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() + 0.1){
+                     crash = true;
+                     curCollideMesh = collisionResults[0].object;
+                     break;
+                 }
+                 crash = false;
+             }
+
+             for(let j=0; j<wheelArr.length; j++ ){
+                 if(crash) {
+                    break;
+                 }
+                 
+                 var wheel = wheelArr[j].wheel_mesh;
+                 originPoint = wheel.position.clone();
+                 for(let i=0; i<wheel.geometry.vertices.length; i++){
+                    let localVertex = wheel.geometry.vertices[i].clone();
+                    //顶点经过变换后的坐标
+                    let globalVertex = localVertex.applyMatrix4(wheel.matrix);
+                    let directionVector = globalVertex.sub(wheel.position);
+
+                    let ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
+             
+                    //射线是否与与物体产生交集
+                    let collisionResults = ray.intersectObjects(collideMeshList);
+                    if(collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() + 0.1){
+                        crash = true;
+                        curCollideMesh = collisionResults[0].object;
+                        break;
+                    }
+                }
+             }
+                 
+        
+
+
+             //碰撞后发生的事件
+             if(crash){
+                 
+                 explode_sound.play();
+                 curCollideMesh.visible = false;
+                 crash = false;
+                 score.innerText = parseInt(score.innerText) + 10;
+                 console.log('Crash! Score:' + score.innerText);
+                                
+             } else {
+
+             }
+
+
+
+             //清理待碰撞模型：一，已经被撞毁。二，掉落地表以下
+             for(let i=0; i<collideMeshList.length; i++){
+                 if(collideMeshList[i].position.y < -200 || curCollideMesh == collideMeshList[i]){
+                     scene.remove(collideMeshList[i]);
+                     collideMeshList.splice(i, 1);
+                 }
+             }
+             curCollideMesh = null;
+
+             if(collideMeshList.length < 4) {
+                  createShape();
+             }
+
         }
 
         function render(){
@@ -275,28 +381,32 @@
                 wheel_x: 3.5 + x ,
                 wheel_y: 6.5 ,
                 wheel_z: 3.5 + z ,
-                wheel_constraint: null
+                wheel_constraint: null,
+                wheel_mesh:null
             });
            
             wheelArr.push({
                 wheel_x: -3.5 + x ,
                 wheel_y: 6.5  ,
                 wheel_z: -3.5+ z ,
-                wheel_constraint: null
+                wheel_constraint: null,
+                wheel_mesh:null
             });
            
             wheelArr.push({
                 wheel_x: -3.5 + x ,
                 wheel_y: 6.5  ,
                 wheel_z: 3.5 + z,
-                wheel_constraint: null
+                wheel_constraint: null,
+                wheel_mesh:null
             });
             
             wheelArr.push({
                 wheel_x: 3.5 + x ,
                 wheel_y: 6.5  ,
                 wheel_z: -3.5 + z ,
-                wheel_constraint: null
+                wheel_constraint: null,
+                wheel_mesh:null
             });
             
 
@@ -315,6 +425,7 @@
                 wheel.position.set(data.wheel_x,data.wheel_y,data.wheel_z);
                 wheel.castShadow = wheel.receiveShadow = true;
                 scene.add(wheel);
+                wheelArr[index].wheel_mesh =  wheel;
                 wheelArr[index].wheel_constraint = new Physijs.DOFConstraint(
                     wheel, mycar, new THREE.Vector3(data.wheel_x,data.wheel_y, data.wheel_z)
                 );
@@ -452,17 +563,19 @@
              );
              shape.castShadow = shape.receiveShadow = true;
              shape.position.set(
-                 Math.random() * 30 - 15,
+                 Math.random() * 50 -20,
                  20,
-                 Math.random() * 30 - 15
+                 Math.random() * 50 -20
              );
              shape.rotation.set(
                  Math.random() * Math.PI,
                  Math.random() * Math.PI,
                  Math.random() * Math.PI
              );
-             scene.add(shape);
+             //添加到碰撞检测列表中
+             collideMeshList.push(shape);
 
+             scene.add(shape);
 
          }
 
