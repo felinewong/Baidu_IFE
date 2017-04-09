@@ -65,4 +65,4 @@
 
 [WebGL No.7 - 着色器](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_7/index.html)
 
-[WebGL No.8 - 物理引擎](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_8/index.html)
+[WebGL No.8 - 物理引擎](https://felinewong.github.io/Baidu_IFE/ECharts&WebVR%E5%AD%A6%E9%99%A2/task_8/)

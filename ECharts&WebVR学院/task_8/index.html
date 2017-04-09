@@ -16,16 +16,15 @@
             top: 10px;
             left: 50%;
             margin-left: -122px;
-        }
-        .score_container #score {
             color: #ff0000;
             font-size: 50px;
         }
+       
 	</style>
 </head>
 <body >
     <div class="score_container">
-        <div id="score">0</div>
+        <div >score:<span id="score">0<span></div>
     </div>
     <audio src="sound/explode.mp3" preload="auto" id="explode_sound"></audio>
 
@@ -41,9 +40,8 @@
     <script type="text/javascript">
 
         'use strict';
-        Physijs.scripts.ammo = 'ammo.js';
-        Physijs.scripts.worker = 'js/physijs_worker.js';
-        
+        Physijs.scripts.worker = '../lib/physijs_worker.js';
+        Physijs.scripts.ammo = '../lib/ammo.js';
 
         var explode_sound = document.getElementById('explode_sound'),
             score = document.getElementById('score'),
@@ -74,6 +72,7 @@
 
             rotate = 0,
             collideMeshList = [],
+            disappearMeshList = [],
             //标志碰撞是否发生
             crash = false;
 
@@ -276,15 +275,31 @@
 
              //碰撞后发生的事件
              if(crash){
-                 
+                 console.log('Crash!');
                  explode_sound.play();
-                 curCollideMesh.visible = false;
+                 curCollideMesh.times = 60;
+                 disappearMeshList.push(curCollideMesh);
                  crash = false;
                  score.innerText = parseInt(score.innerText) + 10;
-                 console.log('Crash! Score:' + score.innerText);
                                 
              } else {
 
+             }
+
+             //遍历待消失的碰撞模型列表
+             for(let i =0; i<disappearMeshList.length; i++){
+                 var curMesh = disappearMeshList[i];
+                 if(curMesh.times > 0){
+                     if(curMesh.times % 20 ==1){
+                         curMesh.material.color.setHex(0xffffff);
+                     } else if(curMesh.times % 20 == 0) {
+                         curMesh.material.color.setHex(0x888888);
+                     }
+                     curMesh.times --;
+                 } else {
+                     scene.remove(curMesh);
+                     disappearMeshList.splice(i, 1);
+                 }
              }
 
 
@@ -292,7 +307,7 @@
              //清理待碰撞模型：一，已经被撞毁。二，掉落地表以下
              for(let i=0; i<collideMeshList.length; i++){
                  if(collideMeshList[i].position.y < -200 || curCollideMesh == collideMeshList[i]){
-                     scene.remove(collideMeshList[i]);
+                     //
                      collideMeshList.splice(i, 1);
                  }
              }
