@@ -69,8 +69,7 @@
     <script type="text/javascript">
 
         'use strict';
-        
-        
+       
         Physijs.scripts.worker = '../lib/physijs_worker.js';
         Physijs.scripts.ammo = '../lib/ammo.js';
 
@@ -193,7 +192,6 @@
             }
             plane_geometry.computeFaceNormals();
             plane_geometry.computeVertexNormals();
-
             plane = new Physijs.HeightfieldMesh(
                 plane_geometry,
                 plane_material,
@@ -206,27 +204,18 @@
             plane.receiveShadow = true;
             scene.add(plane);
 
-            car = createCar(1,10,0);
-
-            // model
-            /*
-            model = new Physijs.BoxMesh(new THREE.BoxGeometry(10,10,10),
-                new THREE.MeshLambertMaterial({
-                    color: 0xaa44aa
-                })
-            );
-            model.position.set(0,40,0);
-            scene.add(model);
-            */
-
+            //主灯光
             keyLight = new THREE.DirectionalLight( 0xcccccc );
             keyLight.position.set(-59,120,74);
             keyLight.castShadow = true;
             scene.add(keyLight);  
 
+            //环境光
             backLight = new THREE.AmbientLight(0xcccccc, 0.2);
             keyLight.castShadow = true;
             scene.add(backLight);
+
+            car = createCar(1,10,0);
 
             initControl() ;
             animate();
@@ -279,8 +268,7 @@
              for(let j=0; j<wheelArr.length; j++ ){
                  if(crash) {
                     break;
-                 }
-                 
+                 }         
                  var wheel = wheelArr[j].wheel_mesh;
                  originPoint = wheel.position.clone();
                  for(let i=0; i<wheel.geometry.vertices.length; i++){
@@ -301,9 +289,6 @@
                 }
              }
                  
-        
-
-
              //碰撞后发生的事件
              if(crash){
                  console.log('Crash!');
@@ -313,9 +298,7 @@
                  crash = false;
                  score.innerText = parseInt(score.innerText) + 10;
                                 
-             } else {
-
-             }
+             } 
 
              //遍历待消失的碰撞模型列表
              for(let i =0; i<disappearMeshList.length; i++){
@@ -338,7 +321,6 @@
              //清理待碰撞模型：一，已经被撞毁。二，掉落地表以下
              for(let i=0; i<collideMeshList.length; i++){
                  if(collideMeshList[i].position.y < -200 || curCollideMesh == collideMeshList[i]){
-                     //
                      collideMeshList.splice(i, 1);
                  }
              }
@@ -356,8 +338,6 @@
             renderer.render(scene, camera);
             stat.end();
         }
-
-        
 
         function initControl() {
             gui = new dat.GUI();
@@ -417,12 +397,7 @@
             mycar.position.set(x,y,z);
             scene.add(mycar);
             
-            
-
-
-
             //轮子
-            
             wheelArr.push({
                 wheel_x: 3.5 + x ,
                 wheel_y: 6.5 ,
@@ -455,21 +430,19 @@
                 wheel_mesh:null
             });
             
-
             var wheel_geometry = new THREE.CylinderGeometry(2, 2, 1, 10);
-
-            
             wheelArr.forEach(function(data, index){
                 var wheel = new Physijs.CylinderMesh(
                     wheel_geometry,
                     wheel_material,
                     500
                 );
-                
-                
+                       
                 wheel.rotation.x = Math.PI / 2;
                 wheel.position.set(data.wheel_x,data.wheel_y,data.wheel_z);
                 wheel.castShadow = wheel.receiveShadow = true;
+                //轮子用着色器程序渲染
+                useShader(wheel);
                 scene.add(wheel);
                 wheelArr[index].wheel_mesh =  wheel;
                 wheelArr[index].wheel_constraint = new Physijs.DOFConstraint(
@@ -479,21 +452,6 @@
                 wheelArr[index].wheel_constraint.setAngularLowerLimit({x:0, y:-Math.PI/8, z:1});
                 wheelArr[index].wheel_constraint.setAngularUpperLimit({x:0, y:Math.PI/8, z:0});
             });
-
-            
-
-                
-            /*    
-            wheel.rotation.x = Math.PI / 2;
-            wheel.position.set(data.wheel_x,data.wheel_y,data.wheel_z);
-            wheel.castShadow = wheel.receiveShadow = true;
-            scene.add(wheel);
-            wheelArr[index].wheel_constraint = new Physijs.DOFConstraint(
-                wheel, mycar, new THREE.Vector3(data.wheel_x,data.wheel_y, data.wheel_z)
-            );
-            scene.addConstraint(wheelArr[index].wheel_constraint);
-            */
-
 
             return mycar;        
         }
@@ -515,17 +473,12 @@
                     break;
                 case 40:
                 //↓
-                    car.position.x -= 0.1;
                     break;
                 case 37:
                 //←
-                    car.rotateY(Math.PI/180);
-                    rotate += Math.PI/180;
                     break;w
                 case 39:
                 //→
-                    car.rotateY(Math.PI/180);
-                    rotate -= Math.PI/180;
                     break;
                 case 87:
                 //W
@@ -575,17 +528,12 @@
                     break;
                 case 40:
                 //↓
-                    car.position.x -= 0.1;
                     break;
                 case 37:
                 //←
-                    car.rotateY(Math.PI/180);
-                    rotate += Math.PI/180;
                     break;w
                 case 39:
                 //→
-                    car.rotateY(Math.PI/180);
-                    rotate -= Math.PI/180;
                     break;
                 case 87:
                 //W
@@ -610,21 +558,52 @@
             }
          };
 
+         //创建随机带碰撞形状
          function createShape(){
-             var box_geometry = new THREE.BoxGeometry( 5, 5, 5 );
-             var material = new THREE.MeshLambertMaterial({
-                 color: 0x888888
-             });
-             var shape = new Physijs.BoxMesh(
-                 box_geometry,
-                 material
-             );
+             var box_geometry = new THREE.BoxGeometry( 5, 5, 5 ),
+                 cylinder_geometry = new THREE.CylinderGeometry(3, 3, 6, 32 ),
+                 cone_geometry = new THREE.CylinderGeometry( 0, 3, 5, 32 ),
+                 torus_geometry = new THREE.TorusKnotGeometry( 3, .2, 32, 5 );
+            
+            var material = new THREE.MeshLambertMaterial({color: 0x888888});
+            var shape = null;
+
+
+            switch( Math.floor(Math.random() * 4)) {
+                case 0:
+                    shape = new Physijs.BoxMesh(
+                        box_geometry,
+                        material
+                    );
+                    break;
+                case 1:
+                    shape = new Physijs.CylinderMesh(
+                        cylinder_geometry,
+                        material
+                    );
+                    break;
+                case 2:
+                    shape = new Physijs.ConeMesh(
+                        cone_geometry,
+                        material
+                    );
+                    break;
+                case 3:
+                    shape = new Physijs.ConvexMesh(
+                        torus_geometry,
+                        material
+                    );
+                    break;
+            }
+             
+
              shape.castShadow = shape.receiveShadow = true;
              shape.position.set(
-                 Math.random() * 50 -20,
+                 Math.random() * 60 -20,
                  20,
-                 Math.random() * 50 -20
+                 Math.random() * 60 -20
              );
+             shape.material.color.setRGB( Math.random() * 100 / 100, Math.random() * 100 / 100, Math.random() * 100 / 100 );
              shape.rotation.set(
                  Math.random() * Math.PI,
                  Math.random() * Math.PI,
@@ -632,10 +611,41 @@
              );
              //添加到碰撞检测列表中
              collideMeshList.push(shape);
-
              scene.add(shape);
 
          }
+
+          //使用着色器
+          function useShader(mesh){
+
+            var lightUniform = {
+                type: 'v3',
+                value: keyLight.position
+            };
+            
+            var uniforms = {
+                color: {
+                    type: 'v3',
+                    value: new  THREE.Color('#bbbbbb')
+                },
+                light: lightUniform
+            }
+
+            $.get('shader/cartoon-silhouette.vs', function(vs){
+                $.get('shader/cartoon-silhouette.fs', function(fs){
+                    applyShader(vs,fs);
+                });
+            })
+
+            function applyShader(vs, fs){
+                var material = new THREE.ShaderMaterial({
+                    vertexShader: vs,
+                    fragmentShader: fs,
+                    uniforms: uniforms
+                });
+                mesh.material = material;
+            }
+        }
 
          document.onkeydown = keyDown;
          document.onkeyup =  keyUp;
