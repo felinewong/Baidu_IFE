@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="main" style="width:600px;height:400px;"></div>
+    <script type="text/javascript">
+        //初始化echart实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        //指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts入门实例'
+            },
+            //提示文本
+            tooltip: {},
+            //图例
+            legend: {
+                data:['销量','价格']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: {readOnly: false},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            dataZoom: {
+                show: false,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: ['mao','mao','mao','mao','mao']
+                },
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: ['mao1','mao1','mao1','mao1','mao1']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: true,
+                    name: '价格',
+                    max: 30,
+                    min: 0,
+                    boundaryGap: [0.2,0.2]
+                },
+                {
+                    type: 'value',
+                    scale: true,
+                    name: '销量',
+                    max: 1200,
+                    min: 0,
+                    boundaryGap: [0.2,0.2]
+                }
+            ],
+            series: [
+                {
+                    name: '预购队列',
+                    type: 'bar',
+                    //xAxisIndex: 1,
+                   //yAxisIndex: 1,
+                    data: [25,20,16,10,10]
+                },
+                {
+                    name: '最新成交价',
+                    type: 'line',
+                    xAxisIndex: 1,
+                    yAxisIndex: 1,
+                    data: [500,200,360,100,810]
+                }
+            ]
+        };
+
+        //使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

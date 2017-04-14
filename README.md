@@ -66,3 +66,13 @@
 [WebGL No.7 - 着色器](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_7/index.html)
 
 [WebGL No.8 - 物理引擎](https://felinewong.github.io/Baidu_IFE/ECharts&WebVR%E5%AD%A6%E9%99%A2/task_8/)
+
+[ECharts NO.1 - 零基础绘制ECharts图表](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_11/index.html)
+
+[ECharts NO.2 - 实现自定义的统计图表](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_12/index.html)
+
+[ECharts No.4 - 可视化前的数据预处理](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_13/index.html)
+
+[ECharts No.5 - 动态数据](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_14/index.html)
+
+[ECharts No.6 - 绘制人物关系图](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_15/index.html)
