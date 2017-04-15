@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="main" style="width:600px;height:400px;"></div>
+    <script type="text/javascript">
+        //初始化echart实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        //指定图表的配置项和数据
+        var option = {
+            title: [
+                {
+                    text: 'What my credit score?',
+                    subtext: 'Puerto Rico,%decrease on a year earlier',
+                    subtextStyle: {
+                        color: '#000000'
+                    },
+                    left: 60
+                },
+                {
+                    text: 'Sources:World Blank;Census Bureau;EIU',
+                    subtext: 'Economist',
+                    subtextStyle: {
+                        color: '#000000'
+                    },
+                    left:60,
+                    bottom:10
+                }
+            ],
+            //提示文本
+            tooltip: {},
+            //图例
+            legend: {
+                data:['Population','GDP'],
+                top: 60,
+                left: 60
+            },
+            grid: {
+                top: 100,
+                bottom: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    axisLine: {
+                        onZero: false,
+                        lineStyle: {
+                            width: 2
+                        }
+                    },
+                    axisTick: {
+                        alignWithLabel: true,
+                        inside: true
+                    },
+                    axisLabel: {
+                        margin: 14,
+                        textStyle: {
+                            fontSize: 18,
+                        }
+                    },
+                    data: ['2006','07','08','09','10','11','12','13','14','15']
+                },
+                {
+                    z: 10,
+                    axisLine: {
+                        lineStyle: {
+                            color: 'red',
+                            width: 2
+                        }
+                    }
+                }
+            ],
+            yAxis:{
+                position: 'right',
+                inverse: true,
+                min:0,
+                max:4,
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    z:1,
+                    lineStyle:{
+                        color: '#ffffff',
+                        width: 2
+                    }
+                },
+                axisLabel: {
+                    margin: 8,
+                    textStyle: {
+                        fontSize: 18
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Population',
+                    type: 'bar',
+                    barGap: 0,
+                    barWidth: 15,
+                    data: [2.5,2.0,1.6,1.0,1.0,2.5,2.0,1.6,1.0,1.0],
+                    itemStyle: {
+                        normal: {
+                            color: '#00526d'
+                        }
+                    }
+                },
+                {
+                    name: 'GDP',
+                    type: 'bar',
+                    barWidth: 15,
+                    data: [2.0,2.0,3.0,1.0,1.0,2.5,3.5,3.6,3.0,1.0],
+                    itemStyle: {
+                        normal: {
+                            color: '#00a4dc'
+                        }
+                    }
+                }
+            ],
+            backgroundColor: '#cddee8'
+        };
+
+        //使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
