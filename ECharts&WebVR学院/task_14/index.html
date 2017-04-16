@@ -14,7 +14,11 @@
         myChart.showLoading();
         $.get('data/converted.json', function(data){
             myChart.hideLoading();
-            var stocks = splitData(JSON.parse(data));
+            if (typeof data === 'object') {
+                var stocks = splitData(data);
+            } else {
+                var stocks = splitData(JSON.parse(data));
+            }
             var option = {
                 legend: {
                     data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30'],
