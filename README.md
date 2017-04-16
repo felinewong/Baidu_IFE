@@ -71,8 +71,10 @@
 
 [ECharts NO.2 - 实现自定义的统计图表](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_12/index.html)
 
-[ECharts No.4 - 可视化前的数据预处理](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_13/index.html)
+[ECharts NO.3 - 绘制地图](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_13/index.html)
 
-[ECharts No.5 - 动态数据](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_14/index.html)
+[ECharts No.4 - 可视化前的数据预处理](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_14/index.html)
 
-[ECharts No.6 - 绘制人物关系图](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_15/index.html)
+[ECharts No.5 - 动态数据](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_15/index.html)
+
+[ECharts No.6 - 绘制人物关系图](https://htmlpreview.github.io/?https://github.com/felinewong/Baidu_IFE/blob/master/ECharts&WebVR学院/task_16/index.html)
