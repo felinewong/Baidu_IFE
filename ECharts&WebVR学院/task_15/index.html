@@ -22,7 +22,12 @@
         $.get('data/converted.json', function(data){
             myChart.hideLoading();
             //总的股票数据
-            stocks = splitData(JSON.parse(data));
+            if (typeof data === 'object') {
+                stocks = splitData(data);
+            } else {
+                stocks = splitData(JSON.parse(data));
+            }
+            
             len = stocks.values.length;
             //初始三十天的数据
            
