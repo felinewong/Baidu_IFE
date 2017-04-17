@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="js/echarts.min.js"></script>
+    <script src="js/dataTool.min.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+</head>
+<body style="height:100%;margin:0">
+    <div id="main" style="height:100%;"></div>
+    <script type="text/javascript">
+
+        //初始化echart实例
+        var myChart = echarts.init(document.getElementById('main'));
+        myChart.showLoading();
+        $.get('data/dolphins.gexf', function(data){
+            myChart.hideLoading();
+            var graph = echarts.dataTool.gexf.parse(data);
+            graph.nodes.forEach(function(node){
+                node.itemStyle = null;
+                node.symbolSize = 10;
+                node.value = node.symbolSize;
+                //node.category = node.attributes.modularity_class;
+                node.x = node.y = null;
+                node.draggable = true;
+            });
+
+            option = {
+                title: {
+                    text: 'Dolphins',
+                    top: 20,
+                    left: 20
+                },
+                tooltip: {},
+                legend: [],
+                animation: false,
+                series: [
+                    {
+                        name: 'Dolphins',
+                        type: 'graph',
+                        layout: 'force',
+                        links: graph.links,
+                        //categories: categories,
+                        roam: true,
+                        data: graph.nodes,
+                        label: {
+                            normal: {
+                                position: 'right'
+                            }
+                        },
+                        force: {
+                            repulsion: 100
+                        }
+                    } 
+                ]    
+            };
+            myChart.setOption(option);
+        });
+    </script>
+</body>
+</html>

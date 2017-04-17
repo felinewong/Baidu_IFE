@@ -78,3 +78,9 @@
 [ECharts No.5 - 动态数据](https://felinewong.github.io/Baidu_IFE/ECharts&WebVR%E5%AD%A6%E9%99%A2/task_15/)
 
 [ECharts No.6 - 绘制人物关系图](https://felinewong.github.io/Baidu_IFE/ECharts&WebVR%E5%AD%A6%E9%99%A2/task_16/)
+
+[ECharts NO.7 - 空气质量可视化](https://felinewong.github.io/Baidu_IFE/ECharts&WebVR%E5%AD%A6%E9%99%A2/task_17/)
+
+[WebGL & ECharts - 【综合】三维地球](https://felinewong.github.io/Baidu_IFE/ECharts&WebVR%E5%AD%A6%E9%99%A2/task_18/)
+
+[WebGL & ECharts - 【综合】绘制三维地图](https://felinewong.github.io/Baidu_IFE/ECharts&WebVR%E5%AD%A6%E9%99%A2/task_19/)
